@@ -1,0 +1,2 @@
+为什么会有Callable，Future，FutureTask？
+    正常创建线程使用线程主要有两种方式，继承Thread,实现
