@@ -1,2 +1,15 @@
 为什么会有Callable，Future，FutureTask？
-    正常创建线程使用线程主要有两种方式，继承Thread,实现
+    正常创建线程使用线程主要有两种方式，继承Thread,实现Runnable接口.但是这两种情况都存在一个问题，就是在执行完任务后无法直接获得执行返回结果。如果需要取得执行结果，需要通过共享变量或者使用线程通信的方式来达到结果。
+    在这种情况下，我们可以选择使用Callable和Future达到效果。
+
+Future是什么？
+    Future对象是对具体的Runnable任务或者Callable任务执行结果进行取消，查询是否完成，获取结果等操作。并且可以通过get方法获取执行结果。
+
+Future和FutureTask的区别？
+    Future只是一个接口，无法直接创建对象使用，FutureTask是一个具体实现类。
+
+
+FutureTask具体学习:
+    FutureTask实现了RunnableFuture接口,RunnableFuture接口中继承了Runnable接口，也继承了Future接口，所以既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。
+
+
