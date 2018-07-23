@@ -13,6 +13,7 @@
         <module>javaconcurrency</module>
         <module>netty</module>
         <module>dubboTest</module>
+        <module>DistributeLocks</module>
     </modules>
 
     <dependencies>
