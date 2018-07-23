@@ -42,5 +42,7 @@ public class LockTest {
                 lockTest.needSyncMethod(Thread.currentThread());
             }
         }, "t2");
+        t1.start();
+        t2.start();
     }
 }
