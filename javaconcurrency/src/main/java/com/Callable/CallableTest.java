@@ -19,6 +19,10 @@ public class CallableTest {
         //执行任务并获得Future对象
         //这里需要注意Future对象的get方法是阻塞的，如果先调用了get的话，Future对象会一直等到返回结果.
         Future f1 = pool.submit(c1);
+        //这里
+        if (f1 instanceof FutureTask) {
+            System.out.println("Callable 实际生成 FutureTask 对象");
+        }
         System.out.println(f1.get());
         Future f2 = pool.submit(c2);
         System.out.println(f2.get());
