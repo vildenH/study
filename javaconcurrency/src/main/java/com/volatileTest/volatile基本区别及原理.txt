@@ -15,9 +15,18 @@ volatile使用场景:
     主要使用场景用：
     1.状态标记量
 
+volatile是如何保证内存可见性的？
+    内存屏障:
+    禁止指令重排
+
+
 Java并发编程中原子性问题解决方法？
     1.synchronized
     2.采用Lock，ReentranLock
     3.AtomicInteger
 
+
     synchronized与Lock的区别？
+
+happen-before是什么概念？解决什么问题？
+    Java程序经过编译后会被编译器和处理器进行优化以提高运行效率，其中会使用一种优化技术"重排序"，重排序需要遵守的一个规则，叫做"happen-before"
