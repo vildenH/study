@@ -16,6 +16,7 @@
         <module>DistributeLocks</module>
         <module>crypt</module>
         <module>jvm</module>
+        <module>Java</module>
     </modules>
 
     <dependencies>
