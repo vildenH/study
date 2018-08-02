@@ -6,6 +6,10 @@ package com.practice;
  */
 
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+
 /**
  * 三线程轮流打印ABC
  * 个人总结有两种情形，乐观情形，：
@@ -14,6 +18,15 @@ package com.practice;
  */
 public class abcTest {
 
+    public static void main(String[] args) {
 
+        List<Double> cost = Arrays.asList(10.0, 20.0, 30.0);
+        cost.stream().map(new Function<Double, Double>() {
+            @Override
+            public Double apply(Double num) {
+                return num * 2;
+            }
+        }).forEach(x -> System.out.println(x));
+    }
 }
 
