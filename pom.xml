@@ -18,6 +18,7 @@
         <module>jvm</module>
         <module>algorithm</module>
         <module>Java</module>
+        <module>crawler</module>
     </modules>
 
     <dependencies>
