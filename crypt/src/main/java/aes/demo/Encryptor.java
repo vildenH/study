@@ -54,10 +54,10 @@ public class Encryptor {
 
     public static void main(String[] args) {
         String key = "Bar12345Bar12345"; // 128 bit key
-        String initVector = "RandomInitVector"; // 16 bytes IV
+        String initVector = "RandomInitVectoa"; // 16 bytes IV
 
         System.out.println(decrypt(key, initVector,
-                encrypt(key, initVector, "620423199009217066")));
+                encrypt(key, initVector, "Hello world")));
 
     }
 

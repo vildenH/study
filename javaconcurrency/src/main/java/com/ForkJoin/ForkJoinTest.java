@@ -13,7 +13,7 @@ import java.util.concurrent.RecursiveTask;
 
 //对一个大数组进行并行求和的Task
 public class ForkJoinTest extends RecursiveTask<Long> {
-    public static final int ARRAY_LENGTH = 2048 * 2048;
+    public static final int ARRAY_LENGTH = 20000 * 17000;
     long[] data;
     int start;
     int end;
