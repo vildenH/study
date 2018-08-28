@@ -16,6 +16,13 @@ public class EventListener {
 
     }
 
+    @Subscribe
+    public void listen2(TestEvent event){
+        lastMessage = event.getMessage();
+        System.out.println("Receive Message:" + lastMessage);
+
+    }
+
 
     public int getLastMessage() {
         return lastMessage;
