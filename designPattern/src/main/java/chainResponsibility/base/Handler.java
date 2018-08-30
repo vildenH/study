@@ -3,6 +3,7 @@ package chainResponsibility.base;
 /**
  * @author wh
  * @date 2018/8/28
+ * https://www.cnblogs.com/java-my-life/archive/2012/05/28/2516865.html
  */
 public abstract class Handler {
 
