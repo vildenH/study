@@ -1,4 +1,4 @@
 package interview.LRU;
 
-public class interview {
+public class Main {
 }
