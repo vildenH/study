@@ -19,6 +19,7 @@
         <module>algorithm</module>
         <module>Java</module>
         <module>crawler</module>
+        <module>jmh</module>
     </modules>
 
     <dependencies>
