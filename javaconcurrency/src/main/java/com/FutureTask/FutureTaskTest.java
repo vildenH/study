@@ -13,8 +13,9 @@ public class FutureTaskTest {
         FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
         executor.submit(futureTask);
         executor.shutdown();
-        Thread.sleep(1000);
+        // Thread.sleep(1000);
         System.out.println("主线程执行任务!");
+        //同步阻塞的
         System.out.println("task运行结果" + futureTask.get());
         System.out.println("所有任务结束");
     }

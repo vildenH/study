@@ -23,6 +23,7 @@ public class CallableTest {
         if (f1 instanceof FutureTask) {
             System.out.println("Callable 实际生成 FutureTask 对象");
         }
+        //获取线程返回值
         System.out.println(f1.get());
         Future f2 = pool.submit(c2);
         System.out.println(f2.get());
