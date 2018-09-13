@@ -6,6 +6,10 @@ import java.util.concurrent.*;
  * @author wh
  * @date 2018/7/17
  */
+
+/**
+ * use callable build futureTask
+ */
 public class FutureTaskTest {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newCachedThreadPool();

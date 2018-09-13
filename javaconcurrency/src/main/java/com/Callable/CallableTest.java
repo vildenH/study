@@ -8,6 +8,10 @@ import java.util.concurrent.*;
  * @author wh
  * @date 2018/7/17
  */
+
+/**
+ * callable with future to get result
+ */
 public class CallableTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //创建线程池
