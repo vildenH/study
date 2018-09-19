@@ -29,6 +29,16 @@ public class JMHSample_03_States {
      * threads (ThreadLocals are yours, etc).
      */
 
+    /**
+     * @State 类注解，JMH测试类必须使用@State注解，State定义了一个类实例的生命周期，可以类比Spring Bean的Scope。由于JMH允许多线程同时执行测试，不同的选项含义如下：
+     * <p>
+     * Scope.Thread：默认的State，每个测试线程分配一个实例；
+     * <p>
+     * Scope.Benchmark：所有测试线程共享一个实例，用于测试有状态实例在多线程共享下的性能；
+     * <p>
+     * Scope.Group：每个线程组共享一个实例；
+     */
+
     @State(Scope.Benchmark)
     public static class BenchmarkState {
         volatile double x = Math.PI;
