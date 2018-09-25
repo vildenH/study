@@ -28,7 +28,7 @@ public class App {
     @Benchmark
     public String testEncrypt() {
         String content = RandomStringUtils.randomNumeric(32);
-        String encry = EncryptHelper.encrypt256AesWithSalt(content, "qdb.trade.center");
+        String encry = EncryptHelper.encrypt256Aes(content, "qdb.trade.center");
         return encry;
     }
 
