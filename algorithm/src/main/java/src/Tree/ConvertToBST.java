@@ -1,6 +1,7 @@
 package src.Tree;
 
-import List.ListNode;
+
+import src.List.ListNode;
 
 public class ConvertToBST {
     public TreeNode convert(int[] nums, int left, int right) {

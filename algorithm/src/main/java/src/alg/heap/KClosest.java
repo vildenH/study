@@ -12,7 +12,7 @@ public class KClosest {
  * @param k: An integer
  * @return: the k closest points
  */
-    public Point[] kClosest(Point[] points, Point origin, int k) {
+    public Point[] kClosest(Point[] points, final Point origin, int k) {
         // write your code here
 
         if (points == null) {
