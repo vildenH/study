@@ -5,6 +5,7 @@ import java.util.Stack;
 
 public class QuickSort {
     public static void randomKey(int[] num, int left, int right) {
+        System.out.println("random key ,left:" + left + " right :" + right);
         int keyIndex = new Random().nextInt(right - left) + left;
         int temp = num[left];
         num[left] = num[keyIndex];
@@ -32,6 +33,7 @@ public class QuickSort {
     }
 
     public static int part2(int[] num, int left, int right) {
+        randomKey(num, left, right);
         int i = left - 1;
         int key = num[right];
         for (int j = left; j <= right - 1; j++) {
@@ -53,7 +55,7 @@ public class QuickSort {
 
     public static void quickSort(int[] num, int left, int right) {
 
-        if (left > right) {
+        if (left >= right) {
             return;
         }
 

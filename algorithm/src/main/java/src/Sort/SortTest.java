@@ -4,7 +4,7 @@ public class SortTest {
     public static void main(String[] args) {
 
 
-        int count = 10000; //倒序数组个数
+        int count = 1000000; //倒序数组个数
         int nums[] = new int[count];
         for (int i = 0; i < count; i++) {
             nums[i] = count - i;
