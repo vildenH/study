@@ -31,13 +31,33 @@ public class QuickSort {
         return low;
     }
 
+    public static int part2(int[] num, int left, int right) {
+        int i = left - 1;
+        int key = num[right];
+        for (int j = left; j <= right - 1; j++) {
+            if (num[j] <= key) {
+                i++;
+                if (i != j) {
+                    int temp = num[i];
+                    num[i] = num[j];
+                    num[j] = temp;
+                }
+            }
+        }
+        int temp = num[i + 1];
+        num[i + 1] = num[right];
+        num[right] = temp;
+        return i + 1;
+
+    }
+
     public static void quickSort(int[] num, int left, int right) {
 
         if (left > right) {
             return;
         }
 
-        int mid = part(num, left, right);
+        int mid = part2(num, left, right);
         quickSort(num, left, mid - 1);
         quickSort(num, mid + 1, right);
 
