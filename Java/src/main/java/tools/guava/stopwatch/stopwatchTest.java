@@ -1,4 +1,4 @@
-package tools.guava;
+package tools.guava.stopwatch;
 
 import com.google.common.base.Stopwatch;
 

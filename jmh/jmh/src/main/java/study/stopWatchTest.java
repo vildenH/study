@@ -38,6 +38,8 @@ public class stopWatchTest {
     @Benchmark
     public long testGuava() {
         Stopwatch stopWatch = Stopwatch.createStarted();
+        stopWatch.stop();
         return stopWatch.elapsed(TimeUnit.MILLISECONDS);
+
     }
 }
