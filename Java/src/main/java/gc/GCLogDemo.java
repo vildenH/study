@@ -15,10 +15,11 @@ public class GCLogDemo {
      * -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms4g PrintHeapAtGC
      */
     public static void main(String[] args) throws AWTException {
-        // gcTestFullGc();
-
-        Robot robot = new Robot();
-        robot.mouseMove(1, 0);
+        gcTestFullGc();
+        gcYoungFrom();
+        gcNormal();
+        // Robot robot = new Robot();
+        // robot.mouseMove(1, 0);
     }
 
     public static void gcTestFullGc() {
