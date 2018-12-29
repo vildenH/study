@@ -1,6 +1,9 @@
 package study;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
@@ -13,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Hello world!
  */
 // 输出结果的时间粒度为微秒
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 // 测试方法平均执行时间
 @BenchmarkMode(Mode.AverageTime)
 // 测试方法进程数
@@ -32,7 +35,28 @@ public class App {
         return encry;
     }
 
+    @Benchmark
+    public String testApacheBase64(){
+        return Base64.encodeBase64String(("123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda").getBytes());
+    }
+    @Benchmark
+    public String testJdk8Base64(){
+        return java.util.Base64.getEncoder().encodeToString(("123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda" +
+                "123123123123123123asdasdasdsda").getBytes());
+    }
 
+    @Benchmark
+    public CloseableHttpClient testHttpClients(){
+        return HttpClients.createDefault();
+    }
     @Benchmark
     public void testMethod() {
         // This is a demo/sample template for building your JMH benchmarks. Edit as needed.

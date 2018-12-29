@@ -1,0 +1,45 @@
+NOAUTH 商户无此接口权限 商户未开通此接口权限 请商户前往申请此接口权限
+NOTENOUGH 余额不足 用户帐号余额不足 用户帐号余额不足，请用户充值或更换支付卡后再支付
+ORDERPAID 商户订单已支付 商户订单已支付，无需重复操作 商户订单已支付，无需更多操作
+ORDERCLOSED 订单已关闭 当前订单已关闭，无法支付 当前订单已关闭，请重新下单
+SYSTEMERROR 系统错误 系统超时 系统异常，请用相同参数重新调用API
+APPID_NOT_EXIST APPID不存在 参数中缺少APPID 请检查APPID是否正确
+MCHID_NOT_EXIST MCHID不存在 参数中缺少MCHID 请检查MCHID是否正确
+APPID_MCHID_NOT_MATCH appid和mchid不匹配 appid和mchid 不匹配请确认appid和mchid是否匹配
+LACK_PARAMS 缺少参数 缺少必要的请求参数 请检查参数是否齐全
+OUT_TRADE_NO_USED 商户订单号重复 同一笔交易不能多次提交 请核实商户订单号是否重复提交
+SIGNERROR 签名错误 参数签名结果不正确 请检查签名参数和方法是否都符合签名算法要求
+REQUIRE_POST_METHOD 请使用post方法 未使用post 传递参数请检查请求参数是否通过post方法提交
+POST_DATA_EMPTY post数据为空 post数据不能为空 请检查post数据是否为空
+NOT_UTF8 编码格式错误 未使用指定编码格式 请使用UTF-8 编码格式
+
+
+SYSTEMERROR 接口返回错误 系统超时 请不要更换商户退款单号，请使用相同参数再次调用API。否则可能造成资金损失
+BIZERR_NEED_RETRY 退款业务流程错误，需要商户触发重试来解决 并发情况下，业务被拒绝，商户重试即可解决 请不要更换商户退款单号，请使用相同参数再次调用API。否则可能造成资金损失
+TRADE_OVERDUE 订单已经超过退款期限 订单已经超过可退款的最大期限(支付后一年内可退款) 请选择其他方式自行退款
+ERROR 业务错误 申请退款业务发生错误 该错误都会返回具体的错误原因，请根据实际返回做相应处理。
+USER_ACCOUNT_ABNORMAL 退款请求失败 用户帐号注销 此状态代表退款申请失败，商户可自行处理退款。
+INVALID_REQ_TOO_MUCH 无效请求过多 连续错误请求数过多被系统短暂屏蔽 请检查业务是否正常，确认业务正常后请在1分钟后再来重试
+NOTENOUGH 余额不足 商户可用退款余额不足 此状态代表退款申请失败，商户可根据具体的错误提示做相应的处理。
+INVALID_TRANSACTIONID 无效transaction_id 请求参数未按指引进行填写 请求参数错误，检查原交易号是否存在或发起支付交易接口返回失败
+PARAM_ERROR 参数错误 请求参数未按指引进行填写 请求参数错误，请重新检查再调用退款申请
+APPID_NOT_EXIST APPID不存在 参数中缺少APPID 请检查APPID是否正确
+MCHID_NOT_EXIST MCHID不存在 参数中缺少MCHID 请检查MCHID是否正确
+REQUIRE_POST_METHOD 请使用post方法 未使用post传递参数 请检查请求参数是否通过post方法提交
+SIGNERROR 签名错误 参数签名结果不正确 请检查签名参数和方法是否都符合签名算法要求
+FREQUENCY_LIMITED 频率限制 2个月之前的订单申请退款有频率限制 该笔退款未受理，请降低频率后重试，该笔退款未受理，请降低频率后原单重试，请勿更换单号
+
+SYSTEMERROR 接口返回错误 系统超时 请尝试再次掉调用API。
+REFUNDNOTEXIST 退款订单查询失败 订单号错误或订单状态不正确 请检查订单号是否有误以及订单状态是否正确，如：未支付、已支付未退款，如果订单下没有退款单，则会返回此错误码，其他信息是不返回的
+INVALID_TRANSACTIONID 无效transaction_id 请求参数未按指引进行填写 请求参数错误，检查原交易号是否存在或发起支付交易接口返回失败
+PARAM_ERROR 参数错误 请求参数未按指引进行填写 请求参数错误，请检查参数再调用退款申请
+APPID_NOT_EXIST APPID不存在 参数中缺少APPID 请检查APPID是否正确
+MCHID_NOT_EXIST MCHID不存在 参数中缺少MCHID 请检查MCHID是否正确
+REQUIRE_POST_METHOD 请使用post方法 未使用post传递参数 请检查请求参数是否通过post方法提交
+SIGNERROR 签名错误 参数签名结果不正确 请检查签名参数和方法是否都符合签名算法要求
+XML_FORMAT_ERROR XML格式错误 XML格式错误请检查XML 参数格式是否正确
+
+ORDERPAID 订单已支付 订单已支付，不能发起关单 订单已支付，不能发起关单，请当作已支付的正常交易
+SYSTEMERROR 系统错误 系统错误 系统异常，请重新调用该API
+ORDERCLOSED 订单已关闭 订单已关闭，无法重复关闭 订单已关闭，无需继续调用
+REQUIRE_POST_METHOD 请使用post方法 未使用post 传递参数请检查请求参数是否通过post方法提交

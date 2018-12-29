@@ -1,45 +1,13 @@
 package interview.Main;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.apache.commons.lang3.RandomUtils;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 public class main {
-    public static Map<String, String> map;
-
-    public static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-
     public static void main(String[] args) throws InterruptedException {
-
-        map = new HashMap<>();
-        map.put("test", "test");
-        new Thread(new Runnable() {
-
-
-            @Override
-            public void run() {
-                synchronized (map) {
-                    try {
-                        TimeUnit.SECONDS.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }).start();
-        TimeUnit.SECONDS.sleep(1);
-
-        while (true) {
-            System.out.println(map.get("test"));
-            TimeUnit.MILLISECONDS.sleep(50);
-        }
-
     }
 
     public static void testPoolExecutor() {
@@ -58,5 +26,23 @@ public class main {
             poolExecutor.execute(a);
         }
         ;
+    }
+
+    public static void mtkl2Pi(){
+
+        long count = 0;
+        for (long time = 10000L; time < 100000000000L; time = time * 10) {
+            System.out.println("time = " + time);
+            for (int i = 0; i < time; i++) {
+                double x = RandomUtils.nextDouble(0, 2) - 1;
+                double y = RandomUtils.nextDouble(0, 2) - 1;
+                if (((x * x) + (y * y)) <= 1) {
+                    count++;
+                }
+
+            }
+            System.out.println(count * 4 / (time * 1.0));
+            count = 0;
+        }
     }
 }

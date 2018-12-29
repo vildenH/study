@@ -19,3 +19,4 @@ as-
 echo $JAVA_OPT
 
 echo $JAVA_OPT2
+

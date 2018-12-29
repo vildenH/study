@@ -9,12 +9,12 @@ public class Chapter1_compare_serial_concurrency {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("本实验测试不同测试数据下串行并行所需时间不同：");
-        for (int i = 0; i < 4; i++) {
-            count = (long) (count * Math.pow(10, i));
+        for (int i = 0; i < 6; i++) {
             System.out.println("第 " + i + " 次： count数目为： " + count);
             serial();
             concurrency();
             System.out.println("------------------------------------");
+            count = count*10;
         }
     }
 
@@ -25,7 +25,7 @@ public class Chapter1_compare_serial_concurrency {
             public void run() {
                 int a = 0;
                 for (long i = 0; i < count; i++) {
-                    a += 5;
+                    a ++;
                 }
             }
         });
@@ -43,7 +43,7 @@ public class Chapter1_compare_serial_concurrency {
         long start = System.currentTimeMillis();
         int a = 0;
         for (long i = 0; i < count; i++) {
-            a += 5;
+            a ++;
         }
         int b = 0;
         for (long i = 0; i < count; i++) {
