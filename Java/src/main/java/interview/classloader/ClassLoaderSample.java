@@ -7,6 +7,11 @@ package interview.classloader;
 public class ClassLoaderSample {
 
   public static void main(String[] args) {
+    ClassLoader loader = ClassLoaderSample.class.getClassLoader();
+    while (loader != null) {
+      System.out.println(loader.toString());
+      loader = loader.getParent();
+    }
   }
 
 }
