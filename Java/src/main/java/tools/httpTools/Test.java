@@ -27,7 +27,7 @@ public class Test {
             ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 
                 @Override
-                public String handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+                public String handleResponse(HttpResponse httpResponse) throws IOException {
                     int status = httpResponse.getStatusLine().getStatusCode();
                     if (status >= 200 && status < 300) {
                         HttpEntity entity = httpResponse.getEntity();

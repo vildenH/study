@@ -21,6 +21,6 @@ public class main {
             a.setName("111");
             System.out.println("xxx"+a.getId() + a.getName());
             poolExecutor.execute(a);
-        };
+        }
     }
 }

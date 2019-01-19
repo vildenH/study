@@ -5,5 +5,5 @@ package command;
  * @date 2018/7/13
  */
 public interface Command {
-    public void execute();
+    void execute();
 }
