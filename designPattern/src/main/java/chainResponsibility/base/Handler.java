@@ -24,7 +24,6 @@ public abstract class Handler {
     public Handler getSuccessor() {
         return successor;
     }
-
     /**
      * 赋值方法，设置后继的责任对象
      */
