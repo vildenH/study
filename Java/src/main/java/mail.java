@@ -1,14 +1,19 @@
-import com.sun.mail.util.MailSSLSocketFactory;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import com.sun.mail.util.MailSSLSocketFactory;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 public class mail {
 
@@ -93,8 +98,10 @@ public class mail {
             // 发送消息
             Transport.send(message);
             System.out.println("Sent message successfully");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (javax.mail.MessagingException e) {
+            e.printStackTrace();
         }
 
 
