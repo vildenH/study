@@ -49,76 +49,141 @@ public class Temp {
     }
   }
 
-  private static String string = "public String getBizType() {\n"
-      + "        return bizType;\n"
+
+  @Test
+  public void formatCebCode() throws IOException {
+    ClassLoader classLoader = Temp.class.getClassLoader();
+    File file = new File(classLoader.getResource("cebfile.data").getFile());
+    FileInputStream input = new FileInputStream(file);
+    System.out.println();
+    String s = IOUtils.toString(input);
+    String[] split = s.split("\n");
+    System.out.println("split length" + split.length);
+    for (int i = 0; i < (split.length / 6); i++) {
+      for (int j = i * 6; j < i * 6 + 6; j++) {
+        System.out.print(split[j] + " ");
+      }
+      System.out.println("\n");
+    }
+  }
+  @Test
+  public void generateCebCode() throws IOException {
+    ClassLoader classLoader = Temp.class.getClassLoader();
+    File file = new File(classLoader.getResource("cebfile.data").getFile());
+    List<String> list = IOUtils.readLines(new FileInputStream(file));
+    for (String line : list) {
+      if (StringUtils.isNotBlank(line)) {
+        String[] split = line.split(" ");
+        System.out.printf(" %s(\"%s\", \"%s\", \"%s\", \"%s\",\"%s\")),\n", split[0], split[1], split[2],
+            split[3], split[4],split[5]);
+      }
+    }
+  }
+
+
+  private static String string = "\n"
+      + "    public String getTransSerial() {\n"
+      + "        return transSerial;\n"
       + "    }\n"
       + "\n"
-      + "    public void setBizType(String bizType) {\n"
-      + "        this.bizType = bizType;\n"
+      + "    public void setTransSerial(String transSerial) {\n"
+      + "        this.transSerial = transSerial;\n"
       + "    }\n"
       + "\n"
-      + "    public String getCurrency() {\n"
-      + "        return currency;\n"
+      + "    public String getBankTradeNo() {\n"
+      + "        return bankTradeNo;\n"
       + "    }\n"
       + "\n"
-      + "    public void setCurrency(String currency) {\n"
-      + "        this.currency = currency;\n"
+      + "    public void setBankTradeNo(String bankTradeNo) {\n"
+      + "        this.bankTradeNo = bankTradeNo;\n"
       + "    }\n"
       + "\n"
-      + "    public String getPurpose() {\n"
-      + "        return purpose;\n"
+      + "    public String getProcessDateTime() {\n"
+      + "        return processDateTime;\n"
       + "    }\n"
       + "\n"
-      + "    public void setPurpose(String purpose) {\n"
-      + "        this.purpose = purpose;\n"
+      + "    public void setProcessDateTime(String processDateTime) {\n"
+      + "        this.processDateTime = processDateTime;\n"
       + "    }\n"
       + "\n"
-      + "    public String getDetailsSerial() {\n"
-      + "        return detailsSerial;\n"
+      + "    public String getBizFlag() {\n"
+      + "        return bizFlag;\n"
       + "    }\n"
       + "\n"
-      + "    public void setDetailsSerial(String detailsSerial) {\n"
-      + "        this.detailsSerial = detailsSerial;\n"
+      + "    public void setBizFlag(String bizFlag) {\n"
+      + "        this.bizFlag = bizFlag;\n"
       + "    }\n"
       + "\n"
-      + "    public String getServiceType() {\n"
-      + "        return serviceType;\n"
+      + "    public String getBankBizNo() {\n"
+      + "        return bankBizNo;\n"
       + "    }\n"
       + "\n"
-      + "    public void setServiceType(String serviceType) {\n"
-      + "        this.serviceType = serviceType;\n"
+      + "    public void setBankBizNo(String bankBizNo) {\n"
+      + "        this.bankBizNo = bankBizNo;\n"
       + "    }\n"
       + "\n"
-      + "    public String getDetailsAmount() {\n"
-      + "        return detailsAmount;\n"
+      + "    public String getSettlementType() {\n"
+      + "        return settlementType;\n"
       + "    }\n"
       + "\n"
-      + "    public void setDetailsAmount(String detailsAmount) {\n"
-      + "        this.detailsAmount = detailsAmount;\n"
+      + "    public void setSettlementType(String settlementType) {\n"
+      + "        this.settlementType = settlementType;\n"
       + "    }\n"
       + "\n"
-      + "    public Boolean getDetailsRefund() {\n"
-      + "        return isDetailsRefund;\n"
+      + "    public boolean isPurchaseFlag() {\n"
+      + "        return purchaseFlag;\n"
       + "    }\n"
       + "\n"
-      + "    public void setDetailsRefund(Boolean detailsRefund) {\n"
-      + "        isDetailsRefund = detailsRefund;\n"
+      + "    public void setPurchaseFlag(boolean purchaseFlag) {\n"
+      + "        this.purchaseFlag = purchaseFlag;\n"
       + "    }\n"
       + "\n"
-      + "    public String getOrigTransNo() {\n"
-      + "        return origTransNo;\n"
+      + "    public String getOrigCurrency() {\n"
+      + "        return origCurrency;\n"
       + "    }\n"
       + "\n"
-      + "    public void setOrigTransNo(String origTransNo) {\n"
-      + "        this.origTransNo = origTransNo;\n"
+      + "    public void setOrigCurrency(String origCurrency) {\n"
+      + "        this.origCurrency = origCurrency;\n"
       + "    }\n"
       + "\n"
-      + "    public String getTradeNo() {\n"
-      + "        return tradeNo;\n"
+      + "    public String getOrigAmount() {\n"
+      + "        return origAmount;\n"
       + "    }\n"
       + "\n"
-      + "    public void setTradeNo(String tradeNo) {\n"
-      + "        this.tradeNo = tradeNo;\n"
+      + "    public void setOrigAmount(String origAmount) {\n"
+      + "        this.origAmount = origAmount;\n"
+      + "    }\n"
+      + "\n"
+      + "    public String getDealCurrency() {\n"
+      + "        return dealCurrency;\n"
+      + "    }\n"
+      + "\n"
+      + "    public void setDealCurrency(String dealCurrency) {\n"
+      + "        this.dealCurrency = dealCurrency;\n"
+      + "    }\n"
+      + "\n"
+      + "    public String getDealAmount() {\n"
+      + "        return dealAmount;\n"
+      + "    }\n"
+      + "\n"
+      + "    public void setDealAmount(String dealAmount) {\n"
+      + "        this.dealAmount = dealAmount;\n"
+      + "    }\n"
+      + "\n"
+      + "    public String getSettleFlag() {\n"
+      + "        return settleFlag;\n"
+      + "    }\n"
+      + "\n"
+      + "    public void setSettleFlag(String settleFlag) {\n"
+      + "        this.settleFlag = settleFlag;\n"
+      + "    }\n"
+      + "\n"
+      + "    public String getDealRate() {\n"
+      + "        return dealRate;\n"
+      + "    }\n"
+      + "\n"
+      + "    public void setDealRate(String dealRate) {\n"
+      + "        this.dealRate = dealRate;\n"
       + "    }";
 
   @Test
