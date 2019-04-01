@@ -1,8 +1,12 @@
+package com.wh.study.springwithvue;
+
 import com.sun.mail.util.MailSSLSocketFactory;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Objects;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -12,8 +16,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.junit.Test;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class mail {
 
   private static String mailAuthCode = "mzrpmapdnjubbiha";
@@ -26,49 +33,55 @@ public class mail {
   // 指定发送邮件的主机为 smtp.qq.com
   private static String host = "smtp.qq.com";  //QQ 邮件服务器
 
-  public static void main(String[] args) throws GeneralSecurityException {
+  public static String defaultText = "爱你呀崽崽:)";
+
+  public static String mailText = "昨天晚上没有说到晚安，那今天说早安吧崽崽:)";
+
+//  @Scheduled(cron = "0 0 * * * * ")
+  public void showMail() {
+    System.out.println(buildBackHomeText());
+  }
+
+  @Test
+  public void testText() throws GeneralSecurityException {
 //    buildBackHomeText();
-    sendMail();
+//    sendMail();
   }
 
   /**
    * ZJQ返屋企文本
    */
-  public static String buildBackHomeText() {
-//        春假回国日期
-    LocalDate springFestivalDate = LocalDate.of(2019, 3, 13);
+  public String buildBackHomeText() {
 //        回国日期
-    LocalDate backDate = LocalDate.of(2019, 5, 17);
-
     LocalDate todayDate = LocalDate.now(ZoneId.of("America/New_York"));
-
     StringBuilder text = new StringBuilder();
     text.append("Hi,Jennie!\n")
         .append("周嘉琪小朋友你好呀hh!\n");
     text.append(String.format("今天的日期是 %s .\n", todayDate));
-    if (springFestivalDate.isAfter(todayDate)) {
-      long days = springFestivalDate.toEpochDay() - todayDate.toEpochDay();
-      text.append(
-          String
-              .format("离春假 %s 回国只剩 【 %s 】 天啦！！:) \n", springFestivalDate, days));
-    }
-//        if(springFestivalDate.isEqual(todayDate)){
-//            text.append(String.format("春假今天开始啦！！假期玩的开心呀！！"));
-//        }
+    LocalDate backDate = LocalDate.of(2019, 5, 16);
     if (backDate.isAfter(todayDate)) {
       long days = backDate.toEpochDay() - todayDate.toEpochDay();
-      text.append(String.format("而且离visiting结束 %s 只剩 【 %s 】 天啦！！ \n", backDate, days));
+      text.append(String.format("离visiting结束 %s 只剩 【 %s 】 天啦！！ \n", backDate, days));
     }
-    text.append("睡前邮件，最后一天啦，马上可以抱抱我的小宝贝了！爱你呀:)");
+    if (Objects.nonNull(mailText)) {
+      text.append(mailText + "爱你呀:)");
+    } else {
+      text.append(defaultText);
+    }
 
-    System.out.println("send mail text : \n" + text);
     LocalDateTime.now().minusDays(1);
+    System.out.println(text);
     return text.toString();
 
   }
 
-  public static void sendMail() throws GeneralSecurityException {
-// 获取系统属性
+  @Scheduled(cron = "0 0/1 * * * * ")
+  public void sendMail() throws GeneralSecurityException {
+    LocalTime time = LocalTime.of(19, 7);
+    if (!LocalTime.now().withSecond(0).withNano(0).equals(time)) {
+      return;
+    }
+    //  获取系统属性
     Properties properties = System.getProperties();
     // 设置邮件服务器
     properties.setProperty("mail.smtp.host", host);
@@ -104,6 +117,7 @@ public class mail {
       // 发送消息
       Transport.send(message);
       System.out.println("Sent message successfully");
+      mailText = null;
     } catch (AddressException e) {
       e.printStackTrace();
     } catch (javax.mail.MessagingException e) {
