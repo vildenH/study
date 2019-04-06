@@ -35,7 +35,7 @@ public class mail {
 
   public static String defaultText = "爱你呀崽崽:)";
 
-  public static String mailText = "昨天晚上没有说到晚安，那今天说早安吧崽崽:)";
+  public static String mailText = "收邮件啦崽崽！";
 
 //  @Scheduled(cron = "0 0 * * * * ")
   public void showMail() {
@@ -44,14 +44,14 @@ public class mail {
 
   @Test
   public void testText() throws GeneralSecurityException {
-//    buildBackHomeText();
+    buildBackHomeText();
 //    sendMail();
   }
 
   /**
    * ZJQ返屋企文本
    */
-  public String buildBackHomeText() {
+  public static String buildBackHomeText() {
 //        回国日期
     LocalDate todayDate = LocalDate.now(ZoneId.of("America/New_York"));
     StringBuilder text = new StringBuilder();
@@ -77,7 +77,7 @@ public class mail {
 
   @Scheduled(cron = "0 0/1 * * * * ")
   public void sendMail() throws GeneralSecurityException {
-    LocalTime time = LocalTime.of(19, 7);
+    LocalTime time = LocalTime.of(20, 02);
     if (!LocalTime.now().withSecond(0).withNano(0).equals(time)) {
       return;
     }
