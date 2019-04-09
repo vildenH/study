@@ -35,7 +35,7 @@ public class mail {
 
   public static String defaultText = "爱你呀崽崽:)";
 
-  public static String mailText = "收邮件啦崽崽！";
+  public static String mailText = "我的大只崽崽收邮件啦！今天应该可以准点发的吧！";
 
 //  @Scheduled(cron = "0 0 * * * * ")
   public void showMail() {
@@ -77,7 +77,7 @@ public class mail {
 
   @Scheduled(cron = "0 0/1 * * * * ")
   public void sendMail() throws GeneralSecurityException {
-    LocalTime time = LocalTime.of(20, 02);
+    LocalTime time = LocalTime.of(19, 07);
     if (!LocalTime.now().withSecond(0).withNano(0).equals(time)) {
       return;
     }
