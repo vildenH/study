@@ -1,6 +1,14 @@
 package com.wh.study.springwithvue;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import org.junit.Test;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,17 +16,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Objects;
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import org.junit.Test;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 @Component
 public class mail {
@@ -35,7 +32,7 @@ public class mail {
 
   public static String defaultText = "爱你呀崽崽:)";
 
-  public static String mailText = "我的大只崽崽收邮件啦！今天应该可以准点发的吧！";
+  public static String mailText = "睡前邮件，看看还剩多少天，很想你呀";
 
 //  @Scheduled(cron = "0 0 * * * * ")
   public void showMail() {
@@ -77,7 +74,7 @@ public class mail {
 
   @Scheduled(cron = "0 0/1 * * * * ")
   public void sendMail() throws GeneralSecurityException {
-    LocalTime time = LocalTime.of(19, 07);
+    LocalTime time = LocalTime.of(12, 10);
     if (!LocalTime.now().withSecond(0).withNano(0).equals(time)) {
       return;
     }
