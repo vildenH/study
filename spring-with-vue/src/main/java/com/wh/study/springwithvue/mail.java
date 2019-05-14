@@ -32,7 +32,7 @@ public class mail {
 
   public static String defaultText = "爱你呀崽崽:)";
 
-  public static String mailText = "睡前邮件，看看还剩多少天，很想你呀";
+  public static String mailText = "小崽,今天要期末考试啦。加油呀！考完就出去玩啦！";
 
 //  @Scheduled(cron = "0 0 * * * * ")
   public void showMail() {
@@ -61,7 +61,7 @@ public class mail {
       text.append(String.format("离visiting结束 %s 只剩 【 %s 】 天啦！！ \n", backDate, days));
     }
     if (Objects.nonNull(mailText)) {
-      text.append(mailText + "爱你呀:)");
+      text.append(mailText + "爱你呀宝贝:)");
     } else {
       text.append(defaultText);
     }
@@ -74,7 +74,7 @@ public class mail {
 
   @Scheduled(cron = "0 0/1 * * * * ")
   public void sendMail() throws GeneralSecurityException {
-    LocalTime time = LocalTime.of(12, 10);
+    LocalTime time = LocalTime.of(19,48);
     if (!LocalTime.now().withSecond(0).withNano(0).equals(time)) {
       return;
     }

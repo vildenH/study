@@ -8,11 +8,13 @@ public class StaticProxyTest {
     public static void main(String[] args) {
         Service service = new ServiceImpl();
         //未代理情况
-        service.doSerice();
+        service.doService();
+        service.doService2();
 
         System.out.println("----------------------------------------------");
         //代理类的情况
         ServiceProxy proxy = new ServiceProxy(service);
-        proxy.doSerice();
+        proxy.doService();
+        proxy.doService2();
     }
 }

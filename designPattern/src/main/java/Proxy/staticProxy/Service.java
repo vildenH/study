@@ -5,5 +5,7 @@ package Proxy.staticProxy;
  * @date 2018/7/30
  */
 public interface Service {
-    void doSerice();
+    void doService();
+
+    void doService2();
 }

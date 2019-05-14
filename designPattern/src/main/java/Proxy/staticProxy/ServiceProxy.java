@@ -13,9 +13,14 @@ public class ServiceProxy implements Service {
     }
 
     @Override
-    public void doSerice() {
+    public void doService() {
         System.out.println("入口打印一些日志");
-        service.doSerice();
+        service.doService();
         System.out.println("出口打印一些日志");
+    }
+
+    @Override
+    public void doService2() {
+        service.doService2();
     }
 }

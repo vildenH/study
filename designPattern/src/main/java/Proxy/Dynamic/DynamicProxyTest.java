@@ -21,11 +21,14 @@ public class DynamicProxyTest {
         final Constructor<?> cons = proxyClass.getConstructor(InvocationHandler.class);
         final InvocationHandler ih = new DynamicProxyHandler(serive);
         Service proxy0 = (Service) cons.newInstance(ih);
-        proxy0.doSerice();
+        proxy0.doService();
 
         //简单写法
-        Service proxy = (Service) Proxy.newProxyInstance(Service.class.getClassLoader(), new Class[]{Service.class}, new DynamicProxyHandler(serive));
-        proxy.doSerice();
+        Service proxy = (Service) Proxy.newProxyInstance(
+                Service.class.getClassLoader(),
+                new Class[]{Service.class},
+                new DynamicProxyHandler(serive));
+        proxy.doService2();
 
 
     }

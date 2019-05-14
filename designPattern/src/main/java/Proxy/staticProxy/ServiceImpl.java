@@ -6,7 +6,12 @@ package Proxy.staticProxy;
  */
 public class ServiceImpl implements Service {
     @Override
-    public void doSerice() {
+    public void doService2() {
+        System.out.println("业务代码2 服务代码~~~~~");
+    }
+
+    @Override
+    public void doService() {
         System.out.println("业务代码 服务代码~~~~~");
     }
 }
