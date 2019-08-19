@@ -15,6 +15,12 @@
             <artifactId>disruptor</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.26</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <artifactId>java.concurrency</artifactId>
     <build>
