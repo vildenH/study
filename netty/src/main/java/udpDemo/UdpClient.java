@@ -2,10 +2,7 @@ package udpDemo;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
@@ -21,6 +18,7 @@ public class UdpClient {
     public static final int MessageReceived = 0x99;
     private static int scanPort = 2555;
 
+
     public UdpClient(int scanPort) {
         this.scanPort = scanPort;
     }
@@ -31,7 +29,7 @@ public class UdpClient {
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception {
             String body = packet.content().toString(CharsetUtil.UTF_8);
             // System.out.println(body);
-            System.out.println("收到字符长度为:" + body.length() + "的包:" + body.substring(0,10));
+            System.out.println("收到字符长度为:" + body.length() + "的包:" + body.substring(0, 10));
         }
     }
 
@@ -42,6 +40,7 @@ public class UdpClient {
             Bootstrap b = new Bootstrap();
             b.group(group)
                     .channel(NioDatagramChannel.class)
+                    .option(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(4096))
                     .handler(new CLientHandler());
 
             Channel ch = b.bind(0).sync().channel();
