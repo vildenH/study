@@ -23,7 +23,6 @@ public class UdpClient {
         this.scanPort = scanPort;
     }
 
-
     private static class CLientHandler extends SimpleChannelInboundHandler<DatagramPacket> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception {
