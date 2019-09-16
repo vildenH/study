@@ -1,5 +1,6 @@
 package interview.Main;
 
+import com.alibaba.fastjson.JSON;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -9,7 +10,10 @@ import org.apache.commons.lang3.RandomUtils;
 public class main {
 
   public static void main(String[] args) throws InterruptedException {
-
+    String death_str= "{\"test\":\"\\x";
+    while (true) {
+      JSON.parse(death_str);
+    }
   }
 
   public static void testPoolExecutor() {
