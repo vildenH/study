@@ -1,14 +1,17 @@
 package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.CharsetUtil;
 
 /**
  * @author wh
@@ -28,11 +31,26 @@ public final class SimpleServer {
           .childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
             public void initChannel(SocketChannel ch) throws Exception {
+              ch.pipeline().addLast(new SimpleChannelInboundHandler<ByteBuf>() {
+                @Override
+                protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg)
+                    throws Exception {
+                  String x = msg.toString(CharsetUtil.UTF_8);
+                  System.out.println(x);
+                  ctx.fireChannelRead(x);
+                }
+              });
+              ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
+                @Override
+                protected void channelRead0(ChannelHandlerContext ctx, String msg)
+                    throws Exception {
+                  System.out.println(msg);
+                }
+              });
             }
           });
 
       ChannelFuture f = b.bind(8888).sync();
-
       f.channel().closeFuture().sync();
     } finally {
       bossGroup.shutdownGracefully();
@@ -56,5 +74,6 @@ public final class SimpleServer {
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
       System.out.println("handlerAdded");
     }
+
   }
 }
