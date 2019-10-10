@@ -12,6 +12,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.CharsetUtil;
+import java.security.AccessController;
+import sun.security.action.GetPropertyAction;
 
 /**
  * @author wh
@@ -20,6 +22,9 @@ import io.netty.util.CharsetUtil;
 public final class SimpleServer {
 
   public static void main(String[] args) throws Exception {
+    String osname = AccessController
+        .doPrivileged(new GetPropertyAction("os.name"));
+    System.out.println(osname);
     EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     EventLoopGroup workerGroup = new NioEventLoopGroup();
 

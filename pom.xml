@@ -21,6 +21,7 @@
     <module>crawler</module>
     <module>jmh</module>
     <module>spring-with-vue</module>
+    <module>compiler</module>
   </modules>
 
   <dependencies>

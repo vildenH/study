@@ -25,10 +25,10 @@ public class ThreadTimeOutTest {
 
                             System.out.println(Thread.currentThread() + "rua");
 
-                            // if (Thread.currentThread().isInterrupted()) {
-                            //     System.out.println("i has interputed");
-                            //     break;
-                            // }
+                             if (Thread.currentThread().isInterrupted()) {
+                                 System.out.println("i has interputed");
+                                 break;
+                             }
                         }
                     } catch (Exception e) {
                         Thread.currentThread().interrupt();
