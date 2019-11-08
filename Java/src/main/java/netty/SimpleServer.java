@@ -41,7 +41,7 @@ public final class SimpleServer {
                 protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg)
                     throws Exception {
                   String x = msg.toString(CharsetUtil.UTF_8);
-                  System.out.println(x);
+                  System.out.print("第一次处理:" + x);
                   ctx.fireChannelRead(x);
                 }
               });
@@ -49,7 +49,7 @@ public final class SimpleServer {
                 @Override
                 protected void channelRead0(ChannelHandlerContext ctx, String msg)
                     throws Exception {
-                  System.out.println(msg);
+                  System.out.println("第二次处理:" + msg);
                 }
               });
             }
