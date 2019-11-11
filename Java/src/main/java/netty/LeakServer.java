@@ -7,7 +7,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -17,9 +16,9 @@ import sun.security.action.GetPropertyAction;
 
 /**
  * @author wh
- * @date 2019/1/16
+ * @date 2019/11/10
  */
-public final class SimpleServer {
+public class LeakServer {
 
   public static void main(String[] args) throws Exception {
     String osname = AccessController
@@ -36,32 +35,32 @@ public final class SimpleServer {
           .childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
             public void initChannel(SocketChannel ch) throws Exception {
-              ch.pipeline().addLast(new SimpleChannelInboundHandler<ByteBuf>() {
-                //第一次处理为byteBuf msg，转码为String后往后续handler传输
-                @Override
-                protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg)
-                    throws Exception {
-                  String x = msg.toString(CharsetUtil.UTF_8);
-                  System.out.print("第一次处理: " + x);
-                  ctx.fireChannelRead(x);
-                }
-              });
-              //接受为String的参数
-              ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
-                @Override
-                protected void channelRead0(ChannelHandlerContext ctx, String msg)
-                    throws Exception {
-                  System.out.println("第二次处理: " + msg);
-                }
-              });
+              ch.pipeline().addLast(new LeakHandler());
             }
           });
 
       ChannelFuture f = b.bind(8888).sync();
-      f.channel().closeFuture().sync();
+      f.channel().
+
+          closeFuture().
+
+          sync();
     } finally {
       bossGroup.shutdownGracefully();
       workerGroup.shutdownGracefully();
+    }
+  }
+
+  private static class LeakHandler extends ChannelInboundHandlerAdapter {
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+      //这里不对ByteBuf进行释放处理
+      ByteBuf buf = (ByteBuf) msg;
+      String x = buf.toString(CharsetUtil.UTF_8);
+      System.out.println(x);
+      //主动调用gc 加快垃圾收集的启动
+      System.gc();
     }
   }
 
@@ -83,6 +82,4 @@ public final class SimpleServer {
     }
 
   }
-
 }
-
