@@ -2,10 +2,13 @@ package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOutboundHandlerAdapter;
+import io.netty.channel.ChannelPromise;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -46,14 +49,15 @@ public final class SimpleServer {
                   ctx.fireChannelRead(x);
                 }
               });
-              //接受为String的参数
               ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
                 @Override
                 protected void channelRead0(ChannelHandlerContext ctx, String msg)
                     throws Exception {
                   System.out.println("第二次处理: " + msg);
+                  ctx.writeAndFlush(msg);
                 }
               });
+              ch.pipeline().addFirst(new OutHandler());
             }
           });
 
@@ -84,5 +88,13 @@ public final class SimpleServer {
 
   }
 
-}
+  private static class OutHandler extends ChannelOutboundHandlerAdapter {
 
+    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
+        throws Exception {
+      String backMsg = "返回prefix" + msg;
+      ByteBuf sendBuf = Unpooled.wrappedBuffer(((String) backMsg).getBytes("UTF-8"));
+      ctx.write(sendBuf, promise);
+    }
+  }
+}
