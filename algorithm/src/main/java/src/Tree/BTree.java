@@ -11,15 +11,15 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
   private Node root; //root of the B-tree
   private int height; //height of the B-tree
-  private int n; //number of key-value pairs in the B-tree
+  private int number_of_key_value_paris; //number of key-value pairs in the B-tree
 
   private static final class Node {
 
-    private int m; // number of children
+    private int number_of_children; // number of children
     private Entry[] children = new Entry[M];
 
     private Node(int k) {
-      m = k;
+      number_of_children = k;
     }
   }
 
@@ -53,14 +53,14 @@ public class BTree<Key extends Comparable<Key>, Value> {
     Entry[] children = x.children;
 //    最底层叶子节点
     if (ht == 0) {
-      for (int j = 0; j < x.m; j++) {
+      for (int j = 0; j < x.number_of_children; j++) {
         if (eq(key, children[j].key)) {
           return (Value) children[j].val;
         }
       }
     } else {
-      for (int j = 0; j < x.m; j++) {
-        if (j + 1 == x.m || less(key, children[j + 1].key)) {
+      for (int j = 0; j < x.number_of_children; j++) {
+        if (j + 1 == x.number_of_children || less(key, children[j + 1].key)) {
           return search(children[j].next, key, ht - 1);
         }
       }
@@ -74,7 +74,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
       throw new NullPointerException("key must not be null");
     }
     Node u = insert(root, key, val, height); //分裂后生成的右结点
-    n++;
+    number_of_key_value_paris++;
     if (u == null) {
       return;
     }
@@ -94,7 +94,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
     // external node外部结点，也是叶子结点，在树的最底层，存的是内容value
     if (ht == 0) {
-      for (j = 0; j < h.m; j++) {
+      for (j = 0; j < h.number_of_children; j++) {
         if (less(key, h.children[j].key)) {
           break;
         }
@@ -103,8 +103,8 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
     // internal node内部结点，存的是next地址
     else {
-      for (j = 0; j < h.m; j++) {
-        if ((j + 1 == h.m) || less(key, h.children[j + 1].key)) {
+      for (j = 0; j < h.number_of_children; j++) {
+        if ((j + 1 == h.number_of_children) || less(key, h.children[j + 1].key)) {
           Node u = insert(h.children[j++].next, key, val, ht - 1);
           if (u == null) {
             return null;
@@ -116,12 +116,12 @@ public class BTree<Key extends Comparable<Key>, Value> {
       }
     }
 
-    for (int i = h.m; i > j; i--) {
+    for (int i = h.number_of_children; i > j; i--) {
       h.children[i] = h.children[i - 1];
     }
     h.children[j] = t;
-    h.m++;
-    if (h.m < M) {
+    h.number_of_children++;
+    if (h.number_of_children < M) {
       return null;
     } else {   //分裂结点
       return split(h);
@@ -131,7 +131,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
   // split node in half
   private Node split(Node h) {
     Node t = new Node(M / 2);
-    h.m = M / 2;
+    h.number_of_children = M / 2;
     for (int j = 0; j < M / 2; j++) {
       t.children[j] = h.children[M / 2 + j];
     }
@@ -154,7 +154,7 @@ public class BTree<Key extends Comparable<Key>, Value> {
 
 
   public int size() {
-    return n;
+    return number_of_key_value_paris;
   }
 
   public String toString() {
@@ -166,11 +166,11 @@ public class BTree<Key extends Comparable<Key>, Value> {
     Entry[] children = h.children;
 
     if (ht == 0) {
-      for (int j = 0; j < h.m; j++) {
+      for (int j = 0; j < h.number_of_children; j++) {
         s.append(indent + children[j].key + " " + children[j].val + "\n");
       }
     } else {
-      for (int j = 0; j < h.m; j++) {
+      for (int j = 0; j < h.number_of_children; j++) {
         if (j > 0) {
           s.append(indent + "(" + children[j].key + ")\n");
         }
