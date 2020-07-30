@@ -30,9 +30,8 @@ public class SortList {
       return head;
     }
     ListNode p = head;
-    while (p != null && n > 0) {
+    while (p != null && --n > 0) {
       p = p.next;
-      n--;
     }
     if (p == null) {
       return null;
@@ -63,21 +62,10 @@ public class SortList {
   }
 
   public static void main(String[] args) {
-    ListNode _4 = new ListNode(4);
-    ListNode _2 = new ListNode(2);
-    ListNode _1 = new ListNode(1);
-    ListNode _3 = new ListNode(3);
+    ListNode listNode1 = ListNode.buildList(new int[]{-1, 5, 3, 4, 0});
+    ListNode listNode = new SortList().sortList(listNode1);
 
-    _4.next = _2;
-    _2.next = _1;
-    _1.next = _3;
+    ListNode.printList(listNode);
 
-    ListNode listNode = new SortList().sortList(_4);
-
-    while (listNode != null) {
-      System.out.print(listNode.val + "-->");
-      listNode = listNode.next;
-    }
-    System.out.println("null");
   }
 }
