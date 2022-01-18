@@ -2,6 +2,7 @@ package src.Sort;
 
 public class HeapSort {
 
+    //递归方式
     public static void KeepHeap(int[] nums, int index, int length) {
         if (index > ((length - 1) / 2)) {
             return;
@@ -26,10 +27,36 @@ public class HeapSort {
 
     }
 
-    public static void createHeap(int nums[], int length) //length为数组最后的索引
+    // 循环方式
+    public static void KeepHeap2(int[] nums, int index, int length) {
+        int nowNode = index;
+        while (nowNode <= (length - 1)) {
+            int leftIndex = (2 * nowNode) + 1;
+            int rightIndex = (2 * nowNode) + 2;
+            int maxIndex = nowNode;
+            if (leftIndex <= length && nums[maxIndex] < nums[leftIndex]) {
+                maxIndex = leftIndex;
+            }
+            if (rightIndex <= length && nums[maxIndex] < nums[rightIndex]) {
+                maxIndex = rightIndex;
+            }
+            if (maxIndex != nowNode) {
+                int temp = nums[maxIndex];
+                nums[maxIndex] = nums[nowNode];
+                nums[nowNode] = temp;
+                nowNode = maxIndex;
+            } else {
+                break;
+            }
+        }
+
+
+    }
+
+    public static void createHeap(int[] nums, int length) //length为数组最后的索引
     {
         for (int i = (length - 1) / 2; i >= 0; i--) {
-            KeepHeap(nums, i, length);
+            KeepHeap2(nums, i, length);
         }
     }
 
