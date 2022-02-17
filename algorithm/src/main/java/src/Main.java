@@ -1,48 +1,40 @@
 package src;
 
+
+import src.Tree.TreeNode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author wh
  * @date 2019/3/6
  */
 public class Main {
-
-  public static String countAndSay(int n) {
-    if (n <= 0) {
-      return "";
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        int[] ans = new int[k];
+        dfs(result, ans, 1, 0, n, k);
+        return result;
     }
-    if (n == 1) {
-      return "1";
-    }
-    String result = "1";
-    for (int i = 0; i < n-1; i++) {
-      result = countAndSay(result);
-    }
-    return result;
-  }
 
-
-  public static void main(String[] args) {
-    System.out.println(countAndSay(5));
-  }
-
-  public static String countAndSay(String str) {
-    char[] chs = str.toCharArray();
-    String result = "";
-    int count = 0;
-    for (int i = 0; i < chs.length; ) {
-      char srcChar = chs[i];
-      for (int j = i; j < chs.length; j++) {
-        if (srcChar != chs[j]) {
-          break;
-        } else {
-          count++;
+    // n是当前层数
+    public void dfs(List<List<Integer>> result, int[] ans, int startInt, int nowIndex, int n, int k) {
+        if (nowIndex == k) {
+            result.add(Arrays.stream(ans)
+                    .boxed()
+                    .collect(Collectors.toList()));
+            return;
         }
-      }
-      result += count;
-      result += srcChar;
-      i = i + count;
-      count = 0;
+        for (int i = startInt; i <= n; i++) {
+            ans[nowIndex] = i;
+            dfs(result, ans, i + 1, nowIndex + 1, n, k);
+        }
     }
-    return result;
-  }
+
+    public static void main(String[] args) {
+        List<List<Integer>> combine = new Main().combine(5, 2);
+    }
 }
