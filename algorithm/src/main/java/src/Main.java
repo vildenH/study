@@ -1,11 +1,10 @@
 package src;
 
 
+import src.List.ListNode;
 import src.Tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -13,28 +12,39 @@ import java.util.stream.Collectors;
  * @date 2019/3/6
  */
 public class Main {
-    public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
-        int[] ans = new int[k];
-        dfs(result, ans, 1, 0, n, k);
-        return result;
+
+    //1 - 2 - 3
+    //1
+    //1 - 2 - 3 - 4
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) {
+            return null;
+        }
+        ListNode prevHead = new ListNode(1);
+        prevHead.next = head;
+        ListNode slow = prevHead;
+        ListNode fast = prevHead;
+
+        ListNode prev = prevHead;
+        for (int i = 0; i < n; i++) {
+            if (fast == null) {
+                return head;
+            }
+            fast = fast.next;
+        }
+        while (fast != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        if (slow == head) {
+            return slow.next;
+        } else {
+            prev.next = slow.next;
+            return head;
+        }
     }
 
-    // n是当前层数
-    public void dfs(List<List<Integer>> result, int[] ans, int startInt, int nowIndex, int n, int k) {
-        if (nowIndex == k) {
-            result.add(Arrays.stream(ans)
-                    .boxed()
-                    .collect(Collectors.toList()));
-            return;
-        }
-        for (int i = startInt; i <= n; i++) {
-            ans[nowIndex] = i;
-            dfs(result, ans, i + 1, nowIndex + 1, n, k);
-        }
-    }
 
-    public static void main(String[] args) {
-        List<List<Integer>> combine = new Main().combine(5, 2);
-    }
 }
