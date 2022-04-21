@@ -12,6 +12,7 @@ public class LeftRotateString {
         }
 
 
+
         String reverseStr = ReverseString(str.toCharArray());
         String[] array = reverseStr.split(" ");
         StringBuffer ans = new StringBuffer();
