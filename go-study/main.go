@@ -1,58 +1,31 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"time"
 )
 
-type Person struct {
-	name string
-	sex  bool
-}
+//context 解决goroutine中的元数据传递 和退出通知
 
 func main() {
-	fmt.Println("hello world")
-	var a string = "hello world"
-	fmt.Println(a)
-
-	var count int = 1
-	var pointer2 *int
-	pointer2 = &count
-	*pointer2 = 3
-	fmt.Println(count)
-	fmt.Println(*pointer2)
-
-	var person Person
-	person.name = "hao"
-	person.sex = true
-
-	fmt.Println(person)
-
-	person2 := Person{
-		name: "hao",
-		sex:  false,
-	}
-	fmt.Println(person2)
-
-	test(&person2)
-	fmt.Println(person2)
-
-	s := []int{1, 2, 3}
-	fmt.Println(s)
-	s = append(s, 1)
-	fmt.Println(s)
-
-	for i, value := range s {
-		fmt.Println(i, value)
-
-	}
-	for i, value := range s[1:] {
-		fmt.Println(i, value)
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+	go handle(ctx, 1500*time.Millisecond)
+	select {
+	case <-ctx.Done():
+		fmt.Println("main", ctx.Err())
 	}
 
 }
 
-func test(person *Person) {
-	person.name = "123"
+func handle(ctx context.Context, duration time.Duration) {
+	select {
+	case <-ctx.Done():
+		fmt.Println("handle", ctx.Err())
+		return
+	case <-time.After(duration):
+		fmt.Println("process request with", duration)
 
-	fmt.Println(person)
+	}
 }
