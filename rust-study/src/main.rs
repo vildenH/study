@@ -1,7 +1,7 @@
 use std::io;
 use std::io::stdin;
 
-fn main() { var_test() }
+fn main() { vector() }
 
 // 值对象定义
 fn var_test() {
@@ -13,6 +13,18 @@ fn var_test() {
     // will error
     // x = 11;
     muty = 13;
+}
+
+fn vector() {
+    let mut v = Vec::new();
+    v.push(20);
+    v.push(30);
+    v.push(40);
+    println!("{:?}", v);
+    let num = 30;
+    let result = v.binary_search(&num);
+    let i = result.unwrap();
+    println!("{}", i)
 }
 
 /**
